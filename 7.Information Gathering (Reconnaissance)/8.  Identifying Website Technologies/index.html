@@ -1,0 +1,5020 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../7.Hunting%20Subdomains%20Part%202/">
+      
+      
+        <link rel="next" href="../9.Information%20Gathering%20with%20Burp%20Suite/">
+      
+      
+        <link rel="alternate" type="application/rss+xml" title="RSS feed" href="../../feed_rss_created.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed of updated content" href="../../feed_rss_updated.xml">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.37">
+    
+    
+      
+        <title>8. Identifying Website Technologies - obsidian-mkdocs template</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="obsidian-mkdocs template" class="md-header__button md-logo" aria-label="obsidian-mkdocs template" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            obsidian-mkdocs template
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              8.  Identifying Website Technologies
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="obsidian-mkdocs template" class="md-nav__button md-logo" aria-label="obsidian-mkdocs template" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    obsidian-mkdocs template
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Obsidian Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    1.NoteKeeping
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            1.NoteKeeping
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1.NoteKeeping/1.How%20to%20use%20obsidian%20.../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    paragraph : separated by a line
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1.NoteKeeping/2.GreenShot%20or%20FlameShot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.GreenShot or FlameShot
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    10.Exploitation Basics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            10.Exploitation Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10.Exploitation%20Basics/1.Reverse%20Shells%20vs%20Bind%20Shells/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Reverse Shells vs Bind Shells
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10.Exploitation%20Basics/2.Staged%20vs%20Non-Staged%20Payloads/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Staged vs Non Staged Payloads
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10.Exploitation%20Basics/3.%20%20Gaining%20Root%20with%20Metasploit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.  Gaining Root with Metasploit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10.Exploitation%20Basics/4.Manual%20Exploitation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.Manual Exploitation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10.Exploitation%20Basics/5.Brute%20Force%20Attacks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.Brute Force Attacks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10.Exploitation%20Basics/7.Our%20Notes%2C%20Revisited/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.Our Notes, Revisited
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    11.New Capstone
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            11.New Capstone
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11.New%20Capstone/1.Blue/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Blue
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11.New%20Capstone/2.academy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ftp
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11.New%20Capstone/3.dev/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.dev
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11.New%20Capstone/4.Butler/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    search google : jenkins exploit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11.New%20Capstone/5.blackpearl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.blackpearl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    12.Introduction to Exploit Development (Buffer Overflows)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            12.Introduction to Exploit Development (Buffer Overflows)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12.Introduction%20to%20Exploit%20Development%20%28Buffer%20Overflows%29/1.%20%20Required%20Installations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.  Required Installations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12.Introduction%20to%20Exploit%20Development%20%28Buffer%20Overflows%29/2.Buffer%20Overflows%20Explained/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Buffer Overflows Explained
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12.Introduction%20to%20Exploit%20Development%20%28Buffer%20Overflows%29/3.Spiking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Spiking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    2.Networking refresher
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            2.Networking refresher
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.Networking%20refresher/1.IP%20addresses/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.IP addresses
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.Networking%20refresher/2.MAC%20addresses/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.MAC addresses
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.Networking%20refresher/3.TCP%2C%20UDP%2C%20and%20the%20Three-Way%20Handshake/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.TCP, UDP, and the Three Way Handshake
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.Networking%20refresher/4.Common%20Ports%20and%20Protocols/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.Common Ports and Protocols
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.Networking%20refresher/5.OSI%20model/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.OSI model
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.Networking%20refresher/6.Subnetting%20Part%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.Subnetting Part 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2.Networking%20refresher/7.Subnetting%20Part%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.Subnetting Part 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    3.Setting Up Our Lab
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            3.Setting Up Our Lab
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.Setting%20Up%20Our%20Lab/1.Installing%20VMWare%20or%20VirtualBox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Installing VMWare or VirtualBox
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../3.Setting%20Up%20Our%20Lab/2.Installing%20Kali%20Linux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Installing Kali Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    4.Introduction to Linux
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            4.Introduction to Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/1.Exploring%20Kali%20Linux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Exploring Kali Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/2.%20%20Sudo%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.  Sudo Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/3.%20%20Navigating%20the%20File%20System/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.  Navigating the File System
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/4.%20%20Users%20and%20Privileges/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.  Users and Privileges
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/5.%20%20Common%20Network%20Commands/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  Common Network Commands
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/6.Viewing%2C%20Creating%2C%20and%20Editing%20Files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.Viewing, Creating, and Editing Files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/7.%20%20Starting%20and%20Stopping%20Services/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.  Starting and Stopping Services
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/8.%20%20Installing%20and%20Updating%20Tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8.  Installing and Updating Tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../4.Introduction%20to%20Linux/9.%20%20Scripting%20with%20Bash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ping sweep
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    5.Introduction to Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            5.Introduction to Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/1.intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.intro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/10.Looping/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10.Looping
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/11.%20%20Advanced%20Strings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.  Advanced Strings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/12.Dictionaries/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12.Dictionaries
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/13.%20%20Importing%20Modules/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13.  Importing Modules
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/14.%20Sockets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14. Sockets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/15.%20%20Building%20a%20Port%20Scanner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15.  Building a Port Scanner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/16.%20%20User%20Input/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    16.  User Input
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/17.%20%20Reading%20and%20Writing%20Files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    17.  Reading and Writing Files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/18.%20%20Classes%20and%20Objects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    18.  Classes and Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/19.%20%20Building%20a%20Shoe%20Budget%20Tool/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    19.  Building a Shoe Budget Tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/2.strings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.strings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/3.%20%20Math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.  Math
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/4.%20%20Variables%20and%20Methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.  Variables and Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/5.functions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/6.%20%20Boolean%20Expressions%20and%20Relational%20Operators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.  Boolean Expressions and Relational Operators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/7.%20%20Conditional%20Statements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.  Conditional Statements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/8.%20%20Lists/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8.  Lists
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../5.Introduction%20to%20Python/9.Tuples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9.Tuples
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    6.The Ethical Hacker Methodology
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            6.The Ethical Hacker Methodology
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../6.The%20Ethical%20Hacker%20Methodology/The%20Five%20Stages%20of%20Ethical%20Hacking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Five Stages of Ethical Hacking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    7.Information Gathering (Reconnaissance)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            7.Information Gathering (Reconnaissance)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.Passive%20Reconnaissance%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Passive Reconnaissance Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10.%20Google%20Fu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10. Google Fu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11.Utilizing%20Social%20Media/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.Utilizing Social Media
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12.Additional%20Learning%20%28OSINT%20Fundamentals%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12.Additional Learning (OSINT Fundamentals)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20%20Identifying%20Our%20Target/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.  Identifying Our Target
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20%20Discovering%20Email%20Addresses/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.  Discovering Email Addresses
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20%20Gathering%20Breached%20Credentials%20with%20Breach-Parse/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.  Gathering Breached Credentials with Breach Parse
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%20%20Hunting%20Breached%20Credentials%20with%20DeHashed/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  Hunting Breached Credentials with DeHashed
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.Hunting%20Subdomains%20Part%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.Hunting Subdomains Part 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7.Hunting%20Subdomains%20Part%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.Hunting Subdomains Part 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    8.  Identifying Website Technologies
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9.Information%20Gathering%20with%20Burp%20Suite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9.Information Gathering with Burp Suite
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    8.Scanning & Enumeration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            8.Scanning & Enumeration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../8.Scanning%20%26%20Enumeration/1.%20%20Installing%20Kioptrix/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.  Installing Kioptrix
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../8.Scanning%20%26%20Enumeration/2.Scanning%20with%20Nmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Scanning with Nmap
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../8.Scanning%20%26%20Enumeration/3.Enumerating%20HTTP%20and%20HTTPS%20Part%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Enumerating HTTP and HTTPS Part 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../8.Scanning%20%26%20Enumeration/4.Enumerating%20HTTP%20and%20HTTPS%20Part%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.Enumerating HTTP and HTTPS Part 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../8.Scanning%20%26%20Enumeration/5.%20%20Enumerating%20SMB/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  Enumerating SMB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../8.Scanning%20%26%20Enumeration/6.%20%20Enumerating%20SSH/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.  Enumerating SSH
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../8.Scanning%20%26%20Enumeration/7.%20%20Researching%20Potential%20Vulnerabilities/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.  Researching Potential Vulnerabilities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../8.Scanning%20%26%20Enumeration/8.%20%20Our%20Notes%20So%20Far/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8.  Our Notes So Far
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    9.Vulnerability Scanning with Nessus
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            9.Vulnerability Scanning with Nessus
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9.Vulnerability%20Scanning%20with%20Nessus/1.Scanning%20with%20Nessus%20Part%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Scanning with Nessus Part 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../9.Vulnerability%20Scanning%20with%20Nessus/2.%20%20Scanning%20with%20Nessus%20Part%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.  Scanning with Nessus Part 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    a.Active directory overview
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            a.Active directory overview
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../a.Active%20directory%20overview/1.Active%20Directory%20overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Active Directory overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../a.Active%20directory%20overview/2.Physical%20Active%20Directory%20Components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Physical Active Directory Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../a.Active%20directory%20overview/3.Logical%20Active%20Directory%20Components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Logical Active Directory Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    b.Active Directory Lab Build
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            b.Active Directory Lab Build
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../b.Active%20Directory%20Lab%20Build/1.Lab%20Overview%20and%20Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Lab Overview and Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../b.Active%20Directory%20Lab%20Build/2.Lab%20Build%20-%20%28Cloud%20Alternative%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Lab Build   (Cloud Alternative)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../b.Active%20Directory%20Lab%20Build/3.Downloading%20necessary%20ISO/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Downloading necessary ISO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../b.Active%20Directory%20Lab%20Build/4.%20%20Setting%20Up%20the%20Domain%20Controller/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.  Setting Up the Domain Controller
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../b.Active%20Directory%20Lab%20Build/5.%20%20Setting%20Up%20the%20User%20Machines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  Setting Up the User Machines
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../b.Active%20Directory%20Lab%20Build/6.Setting%20Up%20Users%2C%20Groups%2C%20and%20Policies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.Setting Up Users, Groups, and Policies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../b.Active%20Directory%20Lab%20Build/7.%20%20Joining%20Our%20Machines%20to%20the%20Domain/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.  Joining Our Machines to the Domain
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_16" id="__nav_16_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_16">
+            <span class="md-nav__icon md-icon"></span>
+            Blog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Archive
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_17" >
+        
+          
+          <label class="md-nav__link" for="__nav_17" id="__nav_17_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    c.Attacking Active Directory ;Initial Attack Vectors
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_17_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_17">
+            <span class="md-nav__icon md-icon"></span>
+            c.Attacking Active Directory ;Initial Attack Vectors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/1.Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/10.%20%20IPv6%20Attacks%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10.  IPv6 Attacks Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/11.ipv6%20dns%20takeover%20via%20mitm6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.ipv6 dns takeover via mitm6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/12.ipv6%20attack%20defenses/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12.ipv6 attack defenses
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/13.passback%20attack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13.passback attack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/14.initial%20internal%20attack%20strategy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14.initial internal attack strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/2.%20%20LLMNR%20Poisoning%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.  LLMNR Poisoning Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/3.Capturing%20Hashes%20with%20Responder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Capturing Hashes with Responder
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/4.%20%20Cracking%20Our%20Captured%20Hashes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.  Cracking Our Captured Hashes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/5.%20%20LLMNR%20Poisoning%20Mitigation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  LLMNR Poisoning Mitigation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/6.SMB%20Relay%20Attacks%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.SMB Relay Attacks Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/7.%20%20SMB%20Relay%20Attacks%20Lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.  SMB Relay Attacks Lab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/8.SMB%20relay%20attack%20defenses/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8.SMB relay attack defenses
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../c.Attacking%20Active%20Directory%20%3BInitial%20Attack%20Vectors/9.Gaining%20Shell%20Access/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9.Gaining Shell Access
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_18" >
+        
+          
+          <label class="md-nav__link" for="__nav_18" id="__nav_18_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    d.Attacking Active Directory , Post Compromise Enumeration
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_18_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_18">
+            <span class="md-nav__icon md-icon"></span>
+            d.Attacking Active Directory , Post Compromise Enumeration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../d.Attacking%20Active%20Directory%20%2C%20Post-Compromise%20Enumeration/1.intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.intro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../d.Attacking%20Active%20Directory%20%2C%20Post-Compromise%20Enumeration/2.Domain%20Enumeration%20with%20ldapdomaindump/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Domain Enumeration with ldapdomaindump
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../d.Attacking%20Active%20Directory%20%2C%20Post-Compromise%20Enumeration/3.Domain%20Enumeration%20with%20Bloodhound/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Domain Enumeration with Bloodhound
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../d.Attacking%20Active%20Directory%20%2C%20Post-Compromise%20Enumeration/4.Domain%20Enumeration%20with%20Plumhound/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.Domain Enumeration with Plumhound
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../d.Attacking%20Active%20Directory%20%2C%20Post-Compromise%20Enumeration/5.%20%20Domain%20Enumeration%20with%20PingCastle/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  Domain Enumeration with PingCastle
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_19" >
+        
+          
+          <label class="md-nav__link" for="__nav_19" id="__nav_19_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    e.Attacking Active Directory,Post Compromise Attacks
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_19_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_19">
+            <span class="md-nav__icon md-icon"></span>
+            e.Attacking Active Directory,Post Compromise Attacks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/1.Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/10.LNK%20File%20Attacks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10.LNK File Attacks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/11.%20%20GPP%20%2C%20cPassword%20Attacks%20and%20Mitigations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.  GPP , cPassword Attacks and Mitigations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/12.%20%20Mimikatz%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12.  Mimikatz Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/13.Credential%20Dumping%20with%20Mimikatz/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13.Credential Dumping with Mimikatz
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/14.Post-Compromise%20Attack%20Strategy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14.Post Compromise Attack Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/2.Pass%20Attacks%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Pass Attacks Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/3.%20%20Pass%20Attacks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.  Pass Attacks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/4.%20%20Dumping%20and%20Cracking%20Hashes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.  Dumping and Cracking Hashes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/5.Pass%20Attack%20Mitigations/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.Pass Attack Mitigations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/6.Kerberoasting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.Kerberoasting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/7.Token%20Impersonation%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.Token Impersonation Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/8.%20%20Token%20Impersonation%20Walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8.  Token Impersonation Walkthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../e.Attacking%20Active%20Directory%2CPost-Compromise%20Attacks/9.Token%20Impersonation%20Mitigation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9.Token Impersonation Mitigation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_20" >
+        
+          
+          <label class="md-nav__link" for="__nav_20" id="__nav_20_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    f.We've Compromised the Domain   Now What
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_20_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_20">
+            <span class="md-nav__icon md-icon"></span>
+            f.We've Compromised the Domain   Now What
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../f.We%27ve%20Compromised%20the%20Domain%20-%20Now%20What/1.Post-Domain%20Compromise%20Attack%20Strategy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Post Domain Compromise Attack Strategy
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../f.We%27ve%20Compromised%20the%20Domain%20-%20Now%20What/2.Dumping%20the%20NTDS.dit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Dumping the NTDS.dit
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../f.We%27ve%20Compromised%20the%20Domain%20-%20Now%20What/3.Golden%20Ticket%20Attacks%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Golden Ticket Attacks Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../f.We%27ve%20Compromised%20the%20Domain%20-%20Now%20What/4.Golden%20Ticket%20Attacks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.Golden Ticket Attacks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_21" >
+        
+          
+          <label class="md-nav__link" for="__nav_21" id="__nav_21_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    g.Additional Active Directory Attacks
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_21_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_21">
+            <span class="md-nav__icon md-icon"></span>
+            g.Additional Active Directory Attacks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../g.Additional%20Active%20Directory%20Attacks/1.more%20initial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.more initial
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../g.Additional%20Active%20Directory%20Attacks/2.%20%20Abusing%20ZeroLogon/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.  Abusing ZeroLogon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../g.Additional%20Active%20Directory%20Attacks/3.%20%20PrintNightmare%20%28CVE-2021-1675%29%20Walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.  PrintNightmare (CVE 2021 1675) Walkthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_22" >
+        
+          
+          <label class="md-nav__link" for="__nav_22" id="__nav_22_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    h.Active Directory Case Studies
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_22_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_22">
+            <span class="md-nav__icon md-icon"></span>
+            h.Active Directory Case Studies
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../h.Active%20Directory%20Case%20Studies/1.%20%20AD%20Case%20Study%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.  AD Case Study 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../h.Active%20Directory%20Case%20Studies/2.%20AD%20Case%20Study%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. AD Case Study 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../h.Active%20Directory%20Case%20Studies/3.%20AD%20Case%20Study%203/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. AD Case Study 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_23" >
+        
+          
+          <label class="md-nav__link" for="__nav_23" id="__nav_23_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    i.Post Exploitation
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_23_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_23">
+            <span class="md-nav__icon md-icon"></span>
+            i.Post Exploitation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../i.Post%20Exploitation/1.Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../i.Post%20Exploitation/2.%20File%20Transfers%20Review/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. File Transfers Review
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../i.Post%20Exploitation/3.Maintaining%20Access%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.Maintaining Access Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../i.Post%20Exploitation/4.Pivoting%20Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.Pivoting Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../i.Post%20Exploitation/5.%20%20Pivoting%20Walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  Pivoting Walkthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../i.Post%20Exploitation/6.%20%20Cleaning%20Up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.  Cleaning Up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_24" >
+        
+          
+          <label class="md-nav__link" for="__nav_24" id="__nav_24_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    j.Web Application Enumeration, Revisited
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_24_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_24">
+            <span class="md-nav__icon md-icon"></span>
+            j.Web Application Enumeration, Revisited
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j.Web%20Application%20Enumeration%2C%20Revisited/1.%20%20Finding%20Subdomains%20with%20Assetfinder/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.  Finding Subdomains with Assetfinder
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j.Web%20Application%20Enumeration%2C%20Revisited/2.Finding%20Subdomains%20with%20Amass/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.Finding Subdomains with Amass
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j.Web%20Application%20Enumeration%2C%20Revisited/3.%20%20Finding%20Alive%20Domains%20with%20Httprobe/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.  Finding Alive Domains with Httprobe
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j.Web%20Application%20Enumeration%2C%20Revisited/4.%20%20%20Screenshotting%20Websites%20with%20GoWitness/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.   Screenshotting Websites with GoWitness
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j.Web%20Application%20Enumeration%2C%20Revisited/5.%20%20Automating%20the%20Enumeration%20Process/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  Automating the Enumeration Process
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../j.Web%20Application%20Enumeration%2C%20Revisited/6.%20%20Additional%20Resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.  Additional Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_25" >
+        
+          
+          <label class="md-nav__link" for="__nav_25" id="__nav_25_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    k.Find & Exploit Common Web Vulnerabilities
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_25_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_25">
+            <span class="md-nav__icon md-icon"></span>
+            k.Find & Exploit Common Web Vulnerabilities
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/1.Lab%20Setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.Lab Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/10.%20%20XSS%20-%20Challenge%20Walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10.  XSS   Challenge Walkthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/11.%20%20Command%20Injection%20-%20Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.  Command Injection   Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/12.%20%20Command%20Injection%20-%20Basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12.  Command Injection   Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/13.%20%20Command%20Injection%20-%20Blind%20..%20Out-of-Band/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    13.  Command Injection   Blind .. Out of Band
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/14.Command%20Injection%20-%20Challenge%20Walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    14.Command Injection   Challenge Walkthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/15.%20%20Attacking%20Authentication%20-%20Intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    15.  Attacking Authentication   Intro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/16%20-Attacking%20Authentication%20-%20Brute%20Force/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    16  Attacking Authentication   Brute Force
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/17.%20%20Attacking%20Authentication%20-%20MFA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    17.  Attacking Authentication   MFA
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/18.%20Attacking%20Authentication%20-%20Challenge%20Walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    for each username 4 top passwords
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/19.XXE%20-%20External%20Entities%20Injection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    19.XXE   External Entities Injection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/2.%20%20SQL%20Injection%20-%20Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.  SQL Injection   Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/20.%20%20IDOR%20-%20Insecure%20Direct%20Object%20Reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    20.  IDOR   Insecure Direct Object Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/21.%20capstone/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    21. capstone
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/3.%20%20SQL%20Injection%20-%20UNION/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3.  SQL Injection   UNION
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/4.SQL%20Injection%20-%20Blind%20Part%201/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4.SQL Injection   Blind Part 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/5.%20%20SQL%20Injection%20-%20Challenge%20Waklthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5.  SQL Injection   Challenge Waklthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/6.Credential%20Stuffing%20and%20Password%20Spraying/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    credential_stuffing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/6.SQL%20Injection%20-%20Blind%20Part%202/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6.SQL Injection   Blind Part 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/7.%20%20XSS%20-%20Introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7.  XSS   Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/8.%20%20XSS%20-%20DOM%20Lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8.  XSS   DOM Lab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../k.Find%20%26%20Exploit%20Common%20Web%20Vulnerabilities/9-XSS%20-%20Stored%20Lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9 XSS   Stored Lab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_26" >
+        
+          
+          <label class="md-nav__link" for="__nav_26" id="__nav_26_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    l.Wireless Penetration Testing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_26_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_26">
+            <span class="md-nav__icon md-icon"></span>
+            l.Wireless Penetration Testing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../l.Wireless%20Penetration%20Testing/1.001_Wireless_Penetration_Testing_Overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.001 Wireless Penetration Testing Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../l.Wireless%20Penetration%20Testing/2%20%20%20002_WPA_PS2_Exploit_Walkthrough/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2   002 WPA PS2 Exploit Walkthrough
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_27" >
+        
+          
+          <label class="md-nav__link" for="__nav_27" id="__nav_27_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    m.Legal Documents and Report Writing
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_27_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_27">
+            <span class="md-nav__icon md-icon"></span>
+            m.Legal Documents and Report Writing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../m.Legal%20Documents%20and%20Report%20Writing/1.%20%20001_Common_Legal_Documents/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.  001 Common Legal Documents
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../m.Legal%20Documents%20and%20Report%20Writing/2.%20%20002_Pentest_Report_Writing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.  002 Pentest Report Writing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../m.Legal%20Documents%20and%20Report%20Writing/3%20%20003_Reviewing_a_Real_Pentest_Report/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3  003 Reviewing a Real Pentest Report
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>8.  Identifying Website Technologies</h1>
+
+<p>what website is built with ??</p>
+<p>https://builtwith.com/</p>
+<p>also :
+wappalyzer extension : is not active osint</p>
+<p>in kali : 
+<div class="highlight"><pre><span></span><code>whatweb<span class="w"> </span>http://www.esi.ac.ma/
+</code></pre></div></p>
+<blockquote>
+<p>[!NOTE]
+MORE Tools more infos</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d6f25eb3.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
