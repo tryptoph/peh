@@ -1,7 +1,6 @@
 # Obsidian Notes
 
 
-## n.001 Career Advice
 ## 1. NoteKeeping
 ## 2. Networking refresher
 ## 3. Setting Up Our Lab
@@ -27,3 +26,4 @@
 ## k. Find & Exploit Common Web Vulnerabilities
 ## l. Wireless Penetration Testing
 ## m. Legal Documents and Report Writing
+## n.001 Career Advice
